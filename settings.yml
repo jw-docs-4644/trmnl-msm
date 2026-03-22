@@ -1,0 +1,6 @@
+name: My School Menus
+strategy: webhook
+refresh_interval: 720
+
+no_screen_padding: 'no'
+dark_mode: 'no'

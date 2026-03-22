@@ -17,6 +17,17 @@ TRMNL_URL = "https://trmnl.com/api/custom_plugins"
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 CONFIG_PATH = PROJECT_DIR / "config.toml"
 DATA_PATH = PROJECT_DIR / "tmp" / "data.json"
+ENV_PATH = PROJECT_DIR / ".env"
+
+
+def load_env():
+    """Load variables from .env file if it exists."""
+    if ENV_PATH.exists():
+        for line in ENV_PATH.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key.strip(), value.strip())
 
 
 def load_config():
@@ -152,6 +163,8 @@ def push_to_trmnl(data):
 
 
 def main():
+    load_env()
+
     parser = argparse.ArgumentParser(description="Fetch school menu data from My School Menus")
     parser.add_argument("--date", help="Simulate a specific date (YYYY-MM-DD)", default=None)
     args = parser.parse_args()

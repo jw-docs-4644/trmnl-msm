@@ -1,0 +1,18 @@
+strategy = "webhook"
+live_render = true
+
+[msm]
+organization_id = 1252          # Find your district at https://menus.healthepro.com
+display = "today"               # "today", "today_tomorrow", or "week"
+
+[[msm.menus]]
+site_id = 13192                 # School ID from the URL
+# site_name = "My School"      # Optional override; auto-fetched if omitted
+menu_id = 102650                # Menu ID from the URL
+menu_name = "Lunch"
+
+# Add more schools/menus by repeating the block:
+# [[msm.menus]]
+# site_id = 9683
+# menu_id = 104321
+# menu_name = "Lunch"

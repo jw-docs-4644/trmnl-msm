@@ -1,0 +1,30 @@
+name: Fetch school menus
+
+on:
+  schedule:
+    # 6am MT Mon-Fri (12:00 UTC)
+    - cron: '0 12 * * 1-5'
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Write config
+        run: echo "$MSM_CONFIG" > config.toml
+        env:
+          MSM_CONFIG: ${{ secrets.MSM_CONFIG }}
+
+      - name: Fetch and push
+        run: python bin/fetch
+        env:
+          TRMNL_PLUGIN_UUID: ${{ secrets.TRMNL_PLUGIN_UUID }}
