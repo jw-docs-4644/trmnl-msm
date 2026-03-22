@@ -3,11 +3,11 @@ live_render = true
 
 [msm]
 organization_id = 1252
-display = "week"  # "today", "today_tomorrow", or "week"
+display = "today"  # "today", "today_tomorrow", or "week"
 
 [[msm.menus]]
 site_id = 13192
-#site_name = "Bacon Ranch Pizza Company"
+site_name = "Hot Lunch"
 menu_id = 102650
 menu_name = "Lunch"
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+cd "$(dirname "$0")/.."
+mkdir -p tmp
+zip -j tmp/trmnl-msm.zip settings.yml views/full.liquid views/half_horizontal.liquid views/half_vertical.liquid views/quadrant.liquid
+echo "Created tmp/trmnl-msm.zip"
