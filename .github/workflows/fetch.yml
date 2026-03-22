@@ -2,8 +2,8 @@ name: Fetch school menus
 
 on:
   schedule:
-    # 6am MT Mon-Fri (12:00 UTC)
-    - cron: '0 12 * * 1-5'
+    # 1am PDT Mon-Fri (08:00 UTC)
+    - cron: '0 8 * * 1-5'
   workflow_dispatch: # Allow manual runs
 
 jobs:
