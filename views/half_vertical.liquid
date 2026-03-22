@@ -1,0 +1,31 @@
+<style>
+  .screen { align-items: flex-start !important; justify-content: flex-start !important; }
+  .view--half_vertical .msm-header { padding: 8px 16px 4px; width: 100%; box-sizing: border-box; }
+</style>
+<div class="view view--half_vertical">
+  <div class="msm-header">
+    <div class="title" style="font-size: 16px;">{% if display == "week" %}This Week's {% endif %}School Menus</div>
+    <div class="label">{{ date }}</div>
+  </div>
+  <div style="padding: 0 16px; overflow: hidden; flex: 1;">
+    {% for menu in menus %}
+    <div class="label label--underline">{{ menu.site_name }}</div>
+    {% for day in menu.days %}
+    <div style="margin-bottom: 4px;">
+      {% if display != "today" %}
+      <div class="label">{{ day.date_short }}</div>
+      {% endif %}
+      {% if day.notice %}
+        <div style="font-size: 12px; font-style: italic;">{{ day.notice }}</div>
+      {% elsif day.items.size > 0 %}
+        {% for item in day.items %}
+        <div style="font-size: 12px;">{{ item }}</div>
+        {% endfor %}
+      {% else %}
+        <div style="font-size: 12px;">—</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</div>

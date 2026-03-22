@@ -1,0 +1,56 @@
+<style>
+  .screen { align-items: flex-start !important; justify-content: flex-start !important; }
+  .view--full .msm-header { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 24px 8px; width: 100%; box-sizing: border-box; }
+  .view--full .msm-menu-label { padding: 4px 24px 2px; width: 100%; box-sizing: border-box; }
+  .view--full .msm-days { display: flex; gap: 8px; padding: 0 24px; width: 100%; box-sizing: border-box; overflow: hidden; }
+  .view--full .msm-day { flex: 1; min-width: 0; }
+  .view--full .msm-today-cols { display: flex; gap: 16px; padding: 0 24px; width: 100%; box-sizing: border-box; overflow: hidden; flex: 1; }
+  .view--full .msm-today-col { flex: 1; min-width: 0; }
+</style>
+<div class="view view--full">
+  <div class="msm-header">
+    <span class="title">{% if display == "week" %}This Week's {% endif %}School Menus</span>
+    <span class="label">{{ date }}</span>
+  </div>
+  {% if display == "today" %}
+    <div class="msm-today-cols">
+      {% for menu in menus %}
+      <div class="msm-today-col">
+        <div class="label label--underline">{{ menu.site_name }} — {{ menu.menu_name }}</div>
+        {% assign day = menu.days[0] %}
+        {% if day.notice %}
+          <div style="font-style: italic;">{{ day.notice }}</div>
+        {% elsif day.items.size > 0 %}
+          {% for item in day.items %}
+          <div>{{ item }}</div>
+          {% endfor %}
+        {% else %}
+          <div>No menu available</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for menu in menus %}
+    <div class="msm-menu-label">
+      <span class="label label--underline">{{ menu.site_name }} — {{ menu.menu_name }}</span>
+    </div>
+    <div class="msm-days">
+      {% for day in menu.days %}
+      <div class="msm-day">
+        <div class="label label--underline">{{ day.date_short }}</div>
+        {% if day.notice %}
+          <div style="font-size: 14px; font-style: italic;">{{ day.notice }}</div>
+        {% elsif day.items.size > 0 %}
+          {% for item in day.items %}
+          <div style="font-size: 14px;">{{ item }}</div>
+          {% endfor %}
+        {% else %}
+          <div style="font-size: 14px;">—</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>

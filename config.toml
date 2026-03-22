@@ -1,0 +1,18 @@
+strategy = "webhook"
+live_render = true
+
+[msm]
+organization_id = 1252
+display = "week"  # "today", "today_tomorrow", or "week"
+
+[[msm.menus]]
+site_id = 13192
+#site_name = "Bacon Ranch Pizza Company"
+menu_id = 102650
+menu_name = "Lunch"
+
+#[[msm.menus]]
+#site_id = 9683
+#site_name = "Bacon Ranch Pizza Company"
+#menu_id = 102650
+#menu_name = "Lunch"

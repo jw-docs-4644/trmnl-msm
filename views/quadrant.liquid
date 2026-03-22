@@ -1,0 +1,22 @@
+<style>
+  .screen { align-items: flex-start !important; justify-content: flex-start !important; }
+  .view--quadrant .msm-header { padding: 6px 12px 2px; width: 100%; box-sizing: border-box; }
+</style>
+<div class="view view--quadrant">
+  <div class="msm-header">
+    <div class="title" style="font-size: 18px;">{% if display == "week" %}This Week's {% endif %}{{ menus[0].site_name }}</div>
+    <div class="label" style="font-size: 16px;">{{ date }}</div>
+  </div>
+  <div style="padding: 0 12px; overflow: hidden; flex: 1;">
+    {% assign day = menus[0].days[0] %}
+    {% if day.notice %}
+      <div style="font-size: 18px; font-style: italic;">{{ day.notice }}</div>
+    {% elsif day.items.size > 0 %}
+      {% for item in day.items %}
+      <div style="font-size: 18px;">{{ item }}</div>
+      {% endfor %}
+    {% else %}
+      <div style="font-size: 18px;">No menu</div>
+    {% endif %}
+  </div>
+</div>
