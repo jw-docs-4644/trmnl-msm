@@ -92,7 +92,7 @@ def get_target_dates(display_mode, today=None):
 
 
 def format_date(d):
-    return d.strftime("%a, %b %-d")
+    return f"{d.strftime('%a, %b')} {d.day}"
 
 
 def fetch_menu_data(config, today=None):
