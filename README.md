@@ -156,6 +156,13 @@ menu_id = 102650                # Menu ID from the MSM URL
 menu_name = "Lunch"             # Label shown on the display
 ```
 
+## Responsible Use
+
+This plugin reads from the same public API that powers the My School Menus website. Please use it responsibly:
+
+- Run it at a reasonable frequency. Once a day is plenty — there's no need to poll the API more often than menus actually change.
+- Don't modify it to scrape data in bulk or for commercial purposes.
+
 ## License
 
 MIT
