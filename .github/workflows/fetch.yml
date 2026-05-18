@@ -9,6 +9,8 @@ on:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed for the keepalive commit
     steps:
       - uses: actions/checkout@v4
 
@@ -28,3 +30,8 @@ jobs:
         run: python bin/fetch
         env:
           TRMNL_PLUGIN_UUID: ${{ secrets.TRMNL_PLUGIN_UUID }}
+
+      # Scheduled workflows are disabled after 60 days of repo inactivity.
+      # This pushes a dummy commit only when nearing that threshold.
+      - name: Keepalive
+        uses: gautamkrishnar/keepalive-workflow@v2
