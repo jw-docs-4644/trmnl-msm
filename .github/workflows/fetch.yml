@@ -32,6 +32,15 @@ jobs:
           TRMNL_PLUGIN_UUID: ${{ secrets.TRMNL_PLUGIN_UUID }}
 
       # Scheduled workflows are disabled after 60 days of repo inactivity.
-      # This pushes a dummy commit only when nearing that threshold.
+      # Push an empty commit only when the last commit is 50+ days old.
       - name: Keepalive
-        uses: gautamkrishnar/keepalive-workflow@v2
+        run: |
+          age_days=$(( ( $(date +%s) - $(git log -1 --format=%ct) ) / 86400 ))
+          if [ "$age_days" -ge 50 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Keepalive: prevent scheduled workflow disable"
+            git push
+          else
+            echo "Last commit is $age_days days old; keepalive not needed yet."
+          fi
